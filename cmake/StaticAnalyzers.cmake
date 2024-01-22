@@ -23,7 +23,6 @@ macro(quickBEM_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=unmatchedSuppression
           # noisy and incorrect sometimes
           --suppress=passedByValue
-          --suppress=knownConditionTrueFalse
           # ignores code that cppcheck thinks is invalid C++
           --suppress=syntaxError
           --suppress=preprocessorErrorDirective
