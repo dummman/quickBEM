@@ -36,7 +36,7 @@ jobs:
           - windows-2022
         compiler:
           # you can specify the version after `-` like "llvm-15.0.2".
-          - llvm
+          - llvm-17.0.6
           - gcc
         generator:
           - "Ninja Multi-Config"
@@ -61,7 +61,7 @@ jobs:
             gcov_executable: gcov
             enable_ipo: On
 
-          - compiler: llvm
+          - compiler: llvm-17.0.6
             enable_ipo: Off
             gcov_executable: "llvm-cov gcov"
 
