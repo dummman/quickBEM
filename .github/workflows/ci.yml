@@ -10,7 +10,7 @@ on:
       - develop
 
 env:
-  CLANG_TIDY_VERSION: "15.0.2"
+  CLANG_TIDY_VERSION: "17.0.6"
   CPM_SOURCE_CACHE: ~/.cache/CPM
   VERBOSE: 1
 
@@ -18,6 +18,7 @@ env:
 jobs:
   Test:
     runs-on: ${{ matrix.os }}
+    if: "! contains(github.event.head_commit.message, 'wip')"
     strategy:
       fail-fast: false
 
@@ -35,8 +36,8 @@ jobs:
           - windows-2022
         compiler:
           # you can specify the version after `-` like "llvm-15.0.2".
-          - llvm-15.0.2
-          - gcc-11
+          - llvm
+          - gcc
         generator:
           - "Ninja Multi-Config"
         build_type:
@@ -51,16 +52,16 @@ jobs:
         exclude:
           # mingw is determined by this author to be too buggy to support
           - os: windows-2022
-            compiler: gcc-11
+            compiler: gcc
 
         include:
           # Add appropriate variables for gcov version required. This will intentionally break
           # if you try to use a compiler that does not have gcov set
-          - compiler: gcc-11
-            gcov_executable: gcov-11
+          - compiler: gcc
+            gcov_executable: gcov
             enable_ipo: On
 
-          - compiler: llvm-15.0.2
+          - compiler: llvm
             enable_ipo: Off
             gcov_executable: "llvm-cov gcov"
 
@@ -74,10 +75,10 @@ jobs:
 
           # This exists solely to make sure a non-multiconfig build works
           - os: ubuntu-latest
-            compiler: gcc-11
+            compiler: gcc
             generator: "Unix Makefiles"
             build_type: Debug
-            gcov_executable: gcov-11
+            gcov_executable: gcov
             packaging_maintainer_mode: On
             enable_ipo: Off
 
