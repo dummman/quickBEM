@@ -99,7 +99,7 @@ macro(quickBEM_global_options)
 
   if(quickBEM_ENABLE_HARDENING AND quickBEM_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
-    if(NOT SUPPORTS_UBSAN 
+    if(NOT SUPPORTS_UBSAN
        OR quickBEM_ENABLE_SANITIZER_UNDEFINED
        OR quickBEM_ENABLE_SANITIZER_ADDRESS
        OR quickBEM_ENABLE_SANITIZER_THREAD
@@ -132,7 +132,7 @@ macro(quickBEM_local_options)
 
   if(quickBEM_ENABLE_USER_LINKER)
     include(cmake/Linker.cmake)
-    configure_linker(quickBEM_options)
+    quickBEM_configure_linker(quickBEM_options)
   endif()
 
   include(cmake/Sanitizers.cmake)
@@ -185,7 +185,7 @@ macro(quickBEM_local_options)
 
   if(quickBEM_ENABLE_HARDENING AND NOT quickBEM_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
-    if(NOT SUPPORTS_UBSAN 
+    if(NOT SUPPORTS_UBSAN
        OR quickBEM_ENABLE_SANITIZER_UNDEFINED
        OR quickBEM_ENABLE_SANITIZER_ADDRESS
        OR quickBEM_ENABLE_SANITIZER_THREAD
